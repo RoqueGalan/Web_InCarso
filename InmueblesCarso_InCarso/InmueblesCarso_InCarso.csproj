@@ -174,7 +174,6 @@
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Content\docx\pdf\defaultPDF.pdf" />
-    <Content Include="Content\docx\reporte_fcs_agosto2012.pdf" />
     <Content Include="Content\docx\AvisodePrivacidadIntegral.pdf" />
     <None Include="Properties\PublishProfiles\InCarso.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
