@@ -1,0 +1,100 @@
+﻿@model InmueblesCarso_InCarso.Models.Carpeta
+
+@{
+    ViewBag.PagName = "Crear";
+    ViewBag.CtrlName = "Carpeta";
+    ViewBag.Title = @ViewBag.PagName;
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="ventanaModalLabel">
+        <span class="glyphicon glyphicon-folder-open"></span>
+        <b>@ViewBag.PagName</b>
+        <i class="text-muted">@ViewBag.CtrlName</i>
+    </h4>
+</div>
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="modal-body">
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.CarpetaPadreID)
+            @Html.HiddenFor(model => model.EsItemDelMenu)
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.Orden)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Clave, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Clave, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="well well-sm">
+                <h4> Español </h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NombreES, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NombreES, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NombreES, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DescripcionES, "Descripción", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DescripcionES, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescripcionES, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            
+
+
+            <div class="well well-sm">
+                <h4> English </h4>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NombreEU, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NombreEU, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NombreEU, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DescripcionEU, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DescripcionEU, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DescripcionEU, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            
+
+
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+        <button class="btn" type="button" data-dismiss="modal">Cancelar</button>
+        <input class="btn btn-primary" type="submit" value="Agregar" />
+    </div>
+
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,226 @@
+﻿@model InmueblesCarso_InCarso.Models.Archivo
+
+@{
+    ViewBag.PagName = "Agregar";
+    ViewBag.CtrlName = "Archivo";
+    ViewBag.Title = @ViewBag.PagName;
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="ventanaModalLabel">
+        <span class="glyphicon glyphicon-folder-open"></span>
+        <b>@ViewBag.PagName</b>
+        <i class="text-muted">@ViewBag.CtrlName</i>
+    </h4>
+</div>
+
+
+
+
+@using (Html.BeginForm("Crear", "Archivo", FormMethod.Post, new { @id = "formCrearArchivo", @enctype = "multipart/form-data" }))
+{
+    <div class="modal-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.HiddenFor(model => model.CarpetaID)
+            @Html.HiddenFor(model => model.FechaPublicacion)
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.Orden)
+
+            <p>Selecciona en que idiomas se subira el archivo</p>
+
+
+            <div class="well well-sm">
+
+                <span class="btn btn-default btn-xs pull-right" id="btnActDes_ES">Activar/Desactivar</span>
+
+                <h4> Español</h4>
+
+                <input type="hidden" id="check_ES" name="check_ES" />
+                <div id="renderES">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NombreES,"Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NombreES, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NombreES, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DescripcionES,"Descripción", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DescripcionES, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DescripcionES, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FilePDF_ES" class="control-label col-md-2">Archivo Español</label>
+
+                        <div class="col-md-10">
+                            <input type="file" id="FilePDF_ES" name="FilePDF_ES" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="well well-sm">
+                <span class="btn btn-default btn-xs pull-right" id="btnActDes_EN">Activar/Desactivar</span>
+
+                <h4> Inglés</h4>
+
+                <input type="hidden" id="check_EN" name="check_EN" />
+                <div id="renderEN">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NombreEU,"Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NombreEU, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NombreEU, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DescripcionEU,"Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DescripcionEU, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DescripcionEU, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FilePDF_EN" class="control-label col-md-2">Archivo Inglés</label>
+
+                        <div class="col-md-10">
+                            <input type="file" id="FilePDF_EN" name="FilePDF_EN" class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+        <button class="btn" type="button" data-dismiss="modal">Cancelar</button>
+        <input class="btn btn-primary" type="submit" value="Agregar" />
+    </div>
+
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+<script type="text/javascript">
+
+    $('#renderES').toggle();
+    $('#renderEN').toggle();
+
+
+    $("#btnActDes_ES").on("click", function (e) {
+
+        $('#renderES').toggle("slow");
+
+        if ($("#check_ES").val() == "") {
+            $("#check_ES").val("true");
+
+            $("#NombreES").prop('required', true);
+            //$("#FilePDF_ES").prop('required', true);
+
+        }
+        else {
+            $("#check_ES").val("");
+
+            $("#NombreES").prop('required', false);
+            //$("#FilePDF_ES").prop('required', false);
+        }
+        return false;
+    });
+
+
+    $("#btnActDes_EN").on("click", function (e) {
+
+        $('#renderEN').toggle("slow");
+
+        if ($("#check_EN").val() == "") {
+            $("#check_EN").val("true");
+
+            $("#NombreEN").prop('required', true);
+            //$("#FilePDF_EN").prop('required', true);
+
+        }
+        else {
+            $("#check_EN").val("");
+
+            $("#NombreEN").prop('required', false);
+            //$("#FilePDF_EN").prop('required', false);
+        }
+        return false;
+    });
+
+
+</script>
+
+
+<script type='text/javascript'>
+    $('#formCrearArchivo').submit(function (event) {
+        event.preventDefault();
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+            url: '/Archivo/Crear',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (r) {
+                if (r.success) {
+                    //$('#ventanaModal').modal('hide');
+
+                    var newRuta = "";
+
+                    if (r.carpetaPadreID == null) {
+                        newRuta = '@Url.Action("Detalles", "Carpeta", new { id = 0})';
+                    }
+                    else {
+                        newRuta = r.ruta;
+                    }
+
+                    //alert(newRuta);
+                    $('#renderExplorador').load(newRuta); //  Campo que actualizara
+
+
+                    $('#ventanaModal').modal('hide');
+                }
+                else {
+                    $('#ventanaModalContent').html(result);
+                }
+            },
+            error: function () {
+                alert("Ocurrio un error en el envio");
+            }
+        });
+        return false;
+    });
+
+</script>

@@ -1,0 +1,278 @@
+﻿@model InmueblesCarso_InCarso.Models.Carpeta
+@using InmueblesCarso_InCarso.Helpers
+@*<h1>
+        Contenido de: @Model.NombreES
+    </h1>*@
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+    <li>@Html.ActionLink("ROOT", "Detalles", "Carpeta", new { id = 0 }, new { @Class = "renderCarpeta" })</li>
+    @{
+        var siguiente = Model.CarpetaPadre;
+        var listaLink = new List<InmueblesCarso_InCarso.Models.Carpeta>();
+
+        while (siguiente != null)
+        {
+            listaLink.Add(siguiente);
+            siguiente = siguiente.CarpetaPadre;
+        }
+
+        listaLink = listaLink.Reverse<InmueblesCarso_InCarso.Models.Carpeta>().ToList();
+    }
+
+    @foreach (var item in listaLink)
+    {
+        <li>@Html.ActionLink(item.NombreES, "Detalles", "Carpeta", new { id = item.CarpetaID }, new { @Class = "renderCarpeta" })</li>
+    }
+
+    <li class="active">@Model.NombreES</li>
+</ol>
+
+
+<p>
+    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span> <span class='glyphicon glyphicon-folder-open'></span> Carpeta ", "Crear Nueva Carpeta", "Crear", "Carpeta", new { id = Model.CarpetaID }, new { data_modal = "", data_toggle = "tooltip", @class = "btn btn-success abrirModalCarpeta" })
+    @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-plus'></span> <span class='glyphicon glyphicon-file'></span> Archivo ", "Agregar Nuevo Archivo", "Crear", "Archivo", new { id = Model.CarpetaID }, new { data_modal = "", data_toggle = "tooltip", @class = "btn btn-primary abrirModalArchivoADD" })
+</p>
+
+
+
+
+<table class="table table-condensed table-striped table-hover">
+    <tr>
+        <th class="col-lg-1 col-md-1 col-sm-1"></th>
+        <th class="col-lg-1 col-md-1 col-sm-1"></th>
+        <th class="col-lg-4 col-md-4 col-sm-4">
+            Nombre [ES]
+        </th>
+        <th class="col-lg-4 col-md-4 col-sm-4">
+            Name [EN]
+        </th>
+        <th class="col-lg-1 col-md-1 col-sm-1">
+            Estado
+        </th>
+        <th class="col-lg-1 col-md-1 col-sm-1"></th>
+    </tr>
+
+    <tr>
+        <td></td>
+        <th>
+            @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-folder-open'></span> ..", "Regresar", "Detalles", "Carpeta", new { id = Model.CarpetaPadreID }, new { @Class = "link link-default renderCarpeta" })
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Carpetas)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Orden)
+            </td>
+            <td>
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-folder-close'></span>", item.NombreES, "Detalles", "Carpeta", new { id = item.CarpetaID }, new { @Class = "link link-black renderCarpeta" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreES)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreEU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.CarpetaID }, new { data_modal = "", data_toggle = "tooltip", @Class = "link link-default abrirModalCarpeta" })
+            </td>
+        </tr>
+    }
+
+    @foreach (var item in Model.Archivos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Orden)
+            </td>
+            <td></td>
+
+            <td>
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-file'></span>", "Visualizar Archivo Español", "Detalles", "Archivo", new { id = item.ArchivoID, idioma = "ES", modal = true }, new { data_modal = "", data_toggle = "tooltip", @Class = "link link-default verArchivoModal" })
+                @Html.DisplayFor(modelItem => item.NombreES)
+            </td>
+            <td>
+                @Html.NoEncodeActionLink("<span class='glyphicon glyphicon-file'></span>", "Visualizar Archivo Inglés", "Detalles", "Archivo", new { id = item.ArchivoID, idioma = "EN", modal = true }, new { data_modal = "", data_toggle = "tooltip", @Class = "link link-default verArchivoModal" })
+                @Html.DisplayFor(modelItem => item.NombreEU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", "Archivo", new { id = item.ArchivoID }, new { data_modal = "", data_toggle = "tooltip", @Class = "link link-default abrirModalArchivoEdit" })
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $.ajaxSetup({ cache: false });
+
+        $("a[data-modal].abrirModalCarpeta").on("click", function (e) {
+
+            $('#ventanaModalContent').load(this.href, function () {
+                $('#ventanaModal').modal({
+                    /*backdrop: 'static',*/
+                    keyboard: true
+                }, 'show');
+                bindForm_Carpeta(this);
+            });
+            return false;
+        });
+    });
+
+    function bindForm_Carpeta(dialog) {
+        $('form', dialog).submit(function () {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (r) {
+                    if (r.success) {
+                        $('#ventanaModal').modal('hide');
+
+                        var newRuta = "";
+
+                        if (r.carpetaPadreID == null) {
+                            newRuta = '@Url.Action("Detalles", "Carpeta", new { id = 0})';
+                        }
+                        else {
+                            newRuta = r.ruta;
+                        }
+
+                        //alert(newRuta);
+                        $('#renderExplorador').load(newRuta); //  Campo que actualizara
+
+                    } else {
+                        $('#ventanaModalContent').html(result);
+                        bindForm_Carpeta(dialog);
+                    }
+                }
+            });
+            return false;
+        });
+    }
+
+
+
+    $("a[data-modal].abrirModalArchivoEdit").on("click", function (e) {
+
+        $('#ventanaModalLGContent').load(this.href, function () {
+            $('#ventanaModalLG').modal({
+                //backdrop: 'static',
+                keyboard: true
+            }, 'show');
+        });
+        return false;
+    });
+</script>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $.ajaxSetup({ cache: false });
+
+        $(".renderCarpeta").on("click", function (e) {
+
+            $('#renderExplorador').load(this.href);
+
+
+            return false;
+        });
+    });
+
+</script>
+
+
+<script type="text/javascript">
+
+
+    $("a[data-modal].verArchivoModal").on("click", function (e) {
+
+        $('#ventanaModalLGContent').load(this.href, function () {
+            $('#ventanaModalLG').modal({
+                /*backdrop: 'static',*/
+                keyboard: true
+            }, 'show');
+        });
+        return false;
+    });
+</script>
+
+<script type="text/javascript">
+
+
+    $("a[data-modal].abrirModalArchivoADD").on("click", function (e) {
+
+        $('#ventanaModalContent').load(this.href, function () {
+            $('#ventanaModal').modal({
+                /*backdrop: 'static',*/
+                keyboard: true
+            }, 'show');
+            //bindForm_ArchivoAdd(this);
+        });
+        return false;
+    });
+
+
+
+
+
+
+    function bindForm_ArchivoAdd(dialog) {
+        alert("2");
+        $('form', dialog).submit(function () {
+
+            alert("3");
+            var formData = new FormData($(this)[0]);
+
+            $.ajax({
+                url: '/Archivo/Crear',
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (r) {
+                    if (r.success) {
+
+                        var newRuta = "";
+
+                        if (r.carpetaPadreID == null) {
+                            newRuta = '@Url.Action("Detalles", "Carpeta", new { id = 0})';
+                        }
+                        else {
+                            newRuta = r.ruta;
+                        }
+
+                        //alert(newRuta);
+                        $('#renderExplorador').load(newRuta); //  Campo que actualizara
+                        $('#ventanaModal').modal('hide');
+
+                    } else {
+                        $('#ventanaModalContent').html(result);
+                        bindForm_ArchivoAdd(dialog);
+                    }
+                }
+            });
+            return false;
+        });
+    }
+
+</script>

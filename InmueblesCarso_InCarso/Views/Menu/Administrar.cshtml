@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Administrar Menú";
+}
+
+<h1>
+    <b>ADMINISTRAR</b>
+    <i>Menú</i>
+</h1>
+
+@*<ol class="breadcrumb">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>*@
+
+
+<div id="renderExplorador">
+    @{ Html.RenderAction("Detalles", "Carpeta", new { id = 0 }); }
+</div>
+
+
+
+<!-- modal -->
+<div id='ventanaModal' class='modal fade in' data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='ventanaModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal LG -->
+<div id='ventanaModalLG' class='modal fade in'>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id='ventanaModalLGContent'></div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+
+<script type="text/javascript">
+    $('#renderMenu').html("");
+    $('#renderBarraLogosOpciones').html("");
+
+</script>

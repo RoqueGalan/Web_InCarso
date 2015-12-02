@@ -1,0 +1,329 @@
+﻿@model InmueblesCarso_InCarso.Models.Archivo
+
+@{
+    ViewBag.PagName = "Editar";
+    ViewBag.CtrlName = "Archivo";
+    ViewBag.Title = @ViewBag.PagName;
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title" id="ventanaModalLabel">
+        <span class="glyphicon glyphicon-folder-open"></span>
+        <b>@ViewBag.PagName</b>
+        <i class="text-muted">@ViewBag.CtrlName</i>
+    </h4>
+</div>
+
+
+
+
+@using (Html.BeginForm("Editar", "Archivo", FormMethod.Post, new { id = "formEditarArchivo", enctype = "multipart/form-data" }))
+{
+    <div class="modal-body">
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ArchivoID)
+            @Html.HiddenFor(model => model.FechaPublicacion)
+            @Html.HiddenFor(model => model.RutaArchivoES)
+            @Html.HiddenFor(model => model.RutaArchivoEU)
+
+            <p>Selecciona el idioma en el cual vas a editar</p>
+
+            <div class="well well-sm">
+                <span class="btn btn-default btn-xs pull-right" id="btnActDes_ES">Activar/Desactivar</span>
+                <h4> Español</h4>
+                <input type="hidden" id="check_ES" name="check_ES" />
+
+                <div id="renderES">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NombreES, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NombreES, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NombreES, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DescripcionES, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DescripcionES, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DescripcionES, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FilePDF_ES" class="control-label col-md-2">Archivo Español</label>
+
+                        <div class="col-md-10">
+                            <span class="btn btn-default btn-xs" id="btnActDes_FileES">Modificar el archivo en Español</span>
+                            <input type="hidden" id="check_FileES" name="check_FileES" />
+                            <div id="renderInput_FileES">
+                                <input type="file" id="FilePDF_ES" name="FilePDF_ES" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="well well-sm danger">
+                <span class="btn btn-default btn-xs pull-right" id="btnActDes_EN">Activar/Desactivar</span>
+
+                <h4> Inglés</h4>
+
+                <input type="hidden" id="check_EN" name="check_EN" />
+                <div id="renderEN">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NombreEU, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NombreEU, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NombreEU, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DescripcionEU, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DescripcionEU, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DescripcionEU, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="FilePDF_EN" class="control-label col-md-2">Archivo Inglés</label>
+
+                        <div class="col-md-10">
+                            <input type="hidden" id="check_FileEN" name="check_FileEN" />
+                            <span class="btn btn-default btn-xs" id="btnActDes_FileEN">Modificar el archivo en Inglés</span>
+                            <div id="renderInput_FileEN">
+                                <input type="file" id="FilePDF_EN" name="FilePDF_EN" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Orden, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Orden, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Orden, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.Status, new { @Class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+        <button class="btn" type="button" data-dismiss="modal">Cancelar</button>
+        <input class="btn btn-primary" type="submit" value="Agregar" />
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+<script type="text/javascript">
+
+    var checkES = '@ViewBag.checkES';
+    var checkEN = '@ViewBag.checkEN';
+
+    if (checkES == "") {
+        $('#renderES').toggle();
+    }
+    else {
+        $("#check_ES").val("true");
+    }
+
+    if (checkEN == "") {
+        $('#renderEN').toggle();
+    }
+    else {
+        $("#check_EN").val("true")
+    }
+
+    $("#FilePDF_EN").prop('required', false);
+    $("#FilePDF_EN").prop('readonly', true);
+
+    $("#FilePDF_ES").prop('required', false);
+    $("#FilePDF_ES").prop('readonly', true);
+
+
+    $("#btnActDes_ES").on("click", function (e) {
+
+        $('#renderES').toggle("slow");
+
+        if ($("#check_ES").val() == "") {
+
+            $("#check_ES").val("true");
+
+            $("#NombreES").prop('required', true);
+
+            //input file inicio
+            $("#check_FileES").val("");
+            $("#FilePDF_ES").prop('required', false);
+            $("#FilePDF_ES").prop('readonly', true);
+        }
+        else {
+            $("#check_ES").val("");
+
+            $("#NombreES").prop('required', false);
+
+            //input file inicio
+            $("#check_FileES").val("");
+            $("#FilePDF_ES").prop('required', false);
+            $("#FilePDF_ES").prop('readonly', true);
+        }
+
+        return false;
+    });
+
+
+    $("#btnActDes_EN").on("click", function (e) {
+
+        $('#renderEN').toggle("slow");
+
+        if ($("#check_EN").val() == "") {
+
+            $("#check_EN").val("true");
+
+            $("#NombreEN").prop('required', true);
+
+            //input file inicio
+            $("#check_FileEN").val("");
+            $("#FilePDF_EN").prop('required', false);
+            $("#FilePDF_EN").prop('readonly', true);
+        }
+        else {
+            $("#check_EN").val("");
+
+            $("#NombreEN").prop('required', false);
+
+            //input file inicio
+            $("#check_FileEN").val("");
+            $("#FilePDF_EN").prop('required', false);
+            $("#FilePDF_EN").prop('readonly', true);
+        }
+
+        return false;
+    });
+
+
+
+    $("#btnActDes_FileES").on("click", function (e) {
+
+        if ($("#check_FileES").val() == "") {
+            //input file inicio
+            $("#check_FileES").val("true");
+            $("#FilePDF_ES").prop('required', true);
+            $("#FilePDF_ES").prop('readonly', false);
+        }
+        else {
+            $("#check_FileES").val("");
+            $("#FilePDF_ES").prop('required', false);
+            $("#FilePDF_ES").prop('readonly', true);
+        }
+
+        return false;
+    });
+
+
+
+    $("#btnActDes_FileEN").on("click", function (e) {
+
+        if ($("#check_FileEN").val() == "") {
+            //input file inicio
+            $("#check_FileEN").val("true");
+            $("#FilePDF_EN").prop('required', true);
+            $("#FilePDF_EN").prop('readonly', false);
+        }
+        else {
+            $("#check_FileEN").val("");
+            $("#FilePDF_EN").prop('required', false);
+            $("#FilePDF_EN").prop('readonly', true);
+        }
+
+        return false;
+    });
+
+
+
+
+</script>
+
+
+
+
+
+
+<script type='text/javascript'>
+    $('#formEditarArchivo').submit(function (event) {
+        event.preventDefault();
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+            url: '/Archivo/Editar',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (r) {
+                if (r.success) {
+
+                    var newRuta = "";
+
+                    if (r.carpetaPadreID == null) {
+                        newRuta = '@Url.Action("Detalles", "Carpeta", new { id = 0})';
+                    }
+                    else {
+                        newRuta = r.ruta;
+                    }
+
+                    //alert(newRuta);
+                    $('#renderExplorador').load(newRuta); //  Campo que actualizara
+
+
+                    $('#ventanaModalLG').modal('hide');
+                }
+                else {
+                    $('#ventanaModalLGContent').html(result);
+                }
+            },
+            error: function () {
+                alert("Ocurrio un error en el envio");
+            }
+        });
+        return false;
+    });
+
+</script>

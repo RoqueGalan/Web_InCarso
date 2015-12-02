@@ -1,0 +1,88 @@
+﻿html {
+    background-color: #666666;
+}
+
+body {
+    padding-bottom: 20px;
+    background-color: white;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+}
+
+#menu_lineagris {
+    min-height: 10px;
+    background-color: #555555;
+}
+
+footer {
+    background-color: #666666;
+    color: whitesmoke;
+    min-height: 6em;
+    position: relative;
+    bottom: -1.5em;
+    width: 100%;
+    height: 60px;
+    -webkit-box-shadow: 0px -10px 14px -4px rgba(0,0,0,0.21);
+    -moz-box-shadow: 0px -10px 14px -4px rgba(0,0,0,0.21);
+    box-shadow: 0px -10px 14px -4px rgba(0,0,0,0.21);
+}
+
+    footer a {
+        color: #bbbbbb;
+    }
+
+        footer a:hover {
+            color: white;
+        }
+
+    footer p {
+        padding-top: 1em;
+    }
+
+#footer_lineagris {
+    min-height: 2em;
+    background-color: gray;
+    background-image: linear-gradient(transparent 50%, rgba(255,255,255,.5) 50%);
+    background-size: 2em 0.15em;
+}
+
+#footer_linenegra {
+    min-height: 0.5px;
+    background-color: #555555;
+}
+
+
+#renderBarraLogos{
+
+    
+    }
+
+#renderBarraLogos > .idioma{
+
+}
+ 	
+#logoLogo{
+    max-width:12em;
+   
+}
+
+
+.logo{
+      
+
+}
+
+
+
+img.mex{
+    max-width:7em;
+    margin-right:1.5em;
+    margin-top:0.5em;
+}
+
+

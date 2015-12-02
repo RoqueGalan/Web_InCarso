@@ -1,0 +1,143 @@
+﻿@using InmueblesCarso_InCarso.Helpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Inmuebles Carso</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/menu.multiNivel.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+   
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <div id ="renderLogo"class="logo">
+                    <a href="@Url.Action("Index","Home",null)">
+                        <img src="~/Content/img/Logo.PNG" id="logoLogo" />
+                    </a>
+                </div>
+           </div>
+
+
+
+
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <div id="renderBarraLogosOpciones">
+
+
+
+
+                    <div class="idioma pull-right">
+
+                        @if (ViewBag.idioma == "ES")
+                        {
+                            <a href="@Url.Action("Index", "Home", new { id = "EN"})">
+                                <div class="bandera">
+                                    <img src="~/Content/img/EN-EU.png" />
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index", "Home", new { id = "ES" })">
+                                <div class="bandera">
+                                    <img src="~/Content/img/ES-MEX.png" />
+                                </div>
+                            </a>
+                        }
+
+
+                    </div>
+
+
+                    @*<div class="sesion pull-right">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @Html.NoEncodeActionLink("Cerrar Sesión", "Cerrar Sesión", "CerrarSesion", "Usuario");
+                            }
+                            else
+                            {
+                                @Html.NoEncodeActionLink("Administración", "Administración", "IniciarSesion", "Usuario");
+
+                            }
+                        </div>*@
+
+                    <div class="pull-right">
+                        <a href="http://www.fundacioncarlosslim.org/reporte-de-actividades/" target="_blank">
+
+
+                            @if (ViewBag.idioma == "ES")
+                            {
+                                <div class="mex">
+                                    <img src="~/Content/img/logofundacion.gif" class="mex" />
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="mex">
+                                    <img src="~/Content/img/logofundacion.gif" class="mex" />
+                                </div>
+                            }
+
+
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div class="navbar navbar-inverse" role="navigation">
+        <div id="menu_lineagris"></div>
+        <div class="container" id="renderMenu">
+            @{Html.RenderAction("MenuRoot", "Menu", null);}
+
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+
+    <footer class="footer center-block">
+        <div id="footer_linenegra"></div>
+        <div id="footer_lineagris"></div>
+        <p class="text-center">
+            <small>
+                Plaza Carso · Lago Zurich No. 245 Torre Falcon Piso 20 | <a href="~/Content/docx/AvisodePrivacidadIntegral.pdf" target="_blank">@{string aviso = ViewBag.idioma == "ES" ? "Aviso de privacidad" : "";} @aviso </a>
+            </small>
+        </p>
+    </footer>
+    
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/respond.js"></script>
+    <script src="~/Scripts/menu.multiNivel.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

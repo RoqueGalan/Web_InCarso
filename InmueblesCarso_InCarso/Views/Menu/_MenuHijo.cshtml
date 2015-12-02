@@ -1,0 +1,60 @@
+﻿@using InmueblesCarso_InCarso.Helpers
+@model InmueblesCarso_InCarso.Models.Carpeta
+
+@{
+    var idioma = ViewBag.idioma;
+    var imprimir = "";
+}
+
+<li>
+    @{
+        imprimir = idioma == "ES" ? Model.NombreES : Model.NombreEU;
+    }
+
+    @if (!string.IsNullOrWhiteSpace(imprimir))
+    {
+        <a class="trigger right-caret">@imprimir</a>
+        <ul class="dropdown-menu sub-menu">
+            @foreach (var subCarpeta in Model.Carpetas)
+            {
+                Html.RenderAction("MenuHijo", "Menu", new { carpeta = subCarpeta });
+            }
+
+            @* ARCHIVOS DE LA CARPETA *@
+            @foreach (var archivo in Model.Archivos)
+            {
+                string nombreText = idioma == "ES" ? archivo.NombreES : archivo.NombreEU;
+                string descripcionText = idioma == "ES" ? archivo.DescripcionES : archivo.DescripcionEU;
+
+                string linkText = string.Format("<span class='glyphicon glyphicon-file'></span>{0}", nombreText);
+
+                if (!string.IsNullOrWhiteSpace(nombreText))
+                {
+                    <li>
+                        @Html.NoEncodeActionLink(linkText, descripcionText, "Detalles", "Archivo", new { id = archivo.ArchivoID, idioma = idioma, modal = false }, new { data_toggle = "tooltip", @Class = "link link-default verArchivoDiv" })
+                    </li>
+                }
+            }
+        </ul>
+    }
+</li>
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+    $(".verArchivoDiv").on("click", function (e) {
+
+        event.preventDefault();
+        $('#renderPDF_div').load(this.href, function () {
+
+        });
+        return false;
+    });
+</script>
+
+

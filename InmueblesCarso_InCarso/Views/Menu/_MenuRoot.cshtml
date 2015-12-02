@@ -1,0 +1,61 @@
+﻿@using InmueblesCarso_InCarso.Helpers
+@model IEnumerable<InmueblesCarso_InCarso.Models.Carpeta>
+
+
+@{
+    var idioma = ViewBag.idioma;
+    var imprimir = "";
+}
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+        <span class="sr-only">Pestaña de Navegación</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+
+    @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+</div>
+
+<div class="collapse navbar-collapse" id="navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        @foreach (var carpetaRoot in Model)
+        {
+            imprimir = idioma == "ES" ? carpetaRoot.NombreES : carpetaRoot.NombreEU;
+
+            if (!string.IsNullOrWhiteSpace(imprimir))
+            {
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><small>@imprimir</small><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @foreach (var carpeta in carpetaRoot.Carpetas)
+                        {
+                            Html.RenderAction("MenuHijo", "Menu", new { carpeta = carpeta });
+                        }
+
+                        @* ARCHIVOS DE LA CARPETA *@
+                        @foreach (var archivo in carpetaRoot.Archivos)
+                        {
+                            string nombreText = idioma == "ES" ? archivo.NombreES : archivo.NombreEU;
+                            string descripcionText = idioma == "ES" ? archivo.DescripcionES : archivo.DescripcionEU;
+
+                            string linkText = string.Format("<span class='glyphicon glyphicon-file'></span>{0}", nombreText);
+
+                            if (!string.IsNullOrWhiteSpace(nombreText))
+                            {
+                                <li>
+                                    @Html.NoEncodeActionLink(linkText, descripcionText, "Detalles", "Archivo", new { id = archivo.ArchivoID, idioma = idioma, modal = false }, new { data_toggle = "tooltip", @Class = "link link-default verArchivoDiv" })
+                                </li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+
+
+
+        }
+    </ul>
+</div>
+

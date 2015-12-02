@@ -1,0 +1,203 @@
+﻿@using InmueblesCarso_InCarso.Helpers
+
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+        <span class="sr-only">Pestaña de Navegación</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+
+    @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+
+</div>
+
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse" id="navbar-collapse-1">
+    <ul class="nav navbar-nav">
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Relación Inversionistas <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <!-- REPORTES FINANCIEROS -->
+                <li>
+                    <a class="trigger right-caret">Reportes Financieros</a>
+                    <ul class="dropdown-menu sub-menu">
+                        <li>
+                            <a class="trigger right-caret">Trimestral</a>
+                            <ul class="dropdown-menu sub-menu">
+                                <!-- AÑOS DE LOS REPORTES -->
+                                <li>
+                                    <a class="trigger right-caret">2011</a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        @Html.MenuItemIcon("1er. trimestre", "1er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("2er. trimestre", "2er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento2" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("3er. trimestre", "3er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento3" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("4er. trimestre", "4er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento4" }, new { @Class = "renderPDF" })
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="trigger right-caret">2012</a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        @Html.MenuItemIcon("1er. trimestre", "1er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("2er. trimestre", "2er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento2" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("3er. trimestre", "3er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento3" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("4er. trimestre", "4er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento4" }, new { @Class = "renderPDF" })
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="trigger right-caret">2013</a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        @Html.MenuItemIcon("1er. trimestre", "1er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("2er. trimestre", "2er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento2" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("3er. trimestre", "3er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento3" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("4er. trimestre", "4er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento4" }, new { @Class = "renderPDF" })
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="trigger right-caret">2014</a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        @Html.MenuItemIcon("1er. trimestre", "1er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("2er. trimestre", "2er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento2" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("3er. trimestre", "3er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento3" }, new { @Class = "renderPDF" })
+                                        @Html.MenuItemIcon("4er. trimestre", "4er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento4" }, new { @Class = "renderPDF" })
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a class="trigger right-caret">2015</a>
+                                    <ul class="dropdown-menu sub-menu">
+                                        @Html.MenuItemIcon("1er. trimestre", "1er. trimestre", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- * FIN REPORTES FINANCIEROS -->
+                <!-- INFORMES ANUALES -->
+                <li>
+                    <a class="trigger right-caret">Informes Anuales</a>
+                    <ul class="dropdown-menu sub-menu">
+                        @Html.MenuItemIcon("2010", "2010", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("2011", "2011", "VerPDF", "Documento", new { doc = "NombreDelDocumento2" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("2012", "2012", "VerPDF", "Documento", new { doc = "NombreDelDocumento3" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("2013", "2013", "VerPDF", "Documento", new { doc = "NombreDelDocumento4" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("2014", "2014", "VerPDF", "Documento", new { doc = "NombreDelDocumento5" }, new { @Class = "renderPDF" })
+                    </ul>
+                </li>
+                <!-- * INFORMES ANUALES -->
+            </ul>
+        </li>
+
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eventos Relevantes <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="trigger right-caret">2011</a>
+                    <ul class="dropdown-menu sub-menu">
+                        @Html.MenuItemIcon("13 Enero 2011", "13 Enero 2011", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("17 Enero 2011", "17 Enero 2011", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("30 Junio 2011", "30 Junio 2011", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("7 Septiembre 2011", "7 Septiembre 2011", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                    </ul>
+                </li>
+
+
+            </ul>
+        </li>
+
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Código Mejores Prácticas <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                @Html.MenuItemIcon("2010", "2010", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                @Html.MenuItemIcon("2011", "2011", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                @Html.MenuItemIcon("2012", "2012", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                @Html.MenuItemIcon("2013", "2013", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+            </ul>
+        </li>
+
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Prospectos <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <!-- PROGRAMAS -->
+                <li>
+                    <a class="trigger right-caret">Programas</a>
+                    <ul class="dropdown-menu sub-menu">
+                        @Html.MenuItemIcon("CB Dual Incarso Jun 2012", "CB Dual Incarso Jun 2012", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("CB Dual Incarso 2015", "CB Dual Incarso 2015", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                    </ul>
+                </li>
+                <!-- * FIN PROGRAMAS -->
+                <!-- SUPLEMENTOS -->
+                <li>
+                    <a class="trigger right-caret">Suplementos</a>
+                    <ul class="dropdown-menu sub-menu">
+                        @Html.MenuItemIcon("CB Dual Incarso 08/12", "CB Dual Incarso 08/12", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("CB Dual Incarso 08/13", "CB Dual Incarso 08/13", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                    </ul>
+                </li>
+                <!-- * FIN SUPLEMENTOS -->
+            </ul>
+        </li>
+
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Oferta Pública <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="trigger right-caret">2014</a>
+                    <ul class="dropdown-menu sub-menu">
+                        @Html.MenuItemIcon("Aviso de Oferta", "Aviso de Oferta", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("Folleto Informativo", "Folleto Informativo", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="trigger right-caret">2015</a>
+                    <ul class="dropdown-menu sub-menu">
+                        @Html.MenuItemIcon("Aviso de Oferta", "Aviso de Oferta", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                        @Html.MenuItemIcon("Folleto Informativo", "Folleto Informativo", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Convocatorias <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                @Html.MenuItemIcon("Aviso de Oferta", "Aviso de Oferta", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+            </ul>
+        </li>
+
+        
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Acuerdos <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="trigger right-caret">2011</a>
+                    <ul class="dropdown-menu sub-menu">
+                        @Html.MenuItemIcon("29 Abril 2011", "29 Abril 2011", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="trigger right-caret">2015</a>
+                    <ul class="dropdown-menu sub-menu">
+                        @Html.MenuItemIcon("30 Abril 2012", "30 Abril 2012", "VerPDF", "Documento", new { doc = "NombreDelDocumento1" }, new { @Class = "renderPDF" })
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
